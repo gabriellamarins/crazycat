@@ -1,0 +1,18 @@
+body {
+    background-color: #fefffd;
+    place-items: center;
+
+}
+
+
+h1 {
+    margin-top: 5%;
+    color: black;
+    font-family: "Arial Black", sans-serif;
+    text-align: center;
+}
+
+.cat_index {
+    margin-left: 30%;
+    margin-top: 5%;
+}
