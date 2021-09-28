@@ -26,11 +26,34 @@ const myreviews_db = db.sublevel('myreviews')
 
 
 
-app.post('/movies', async (req , res) => {
-     await movies_db.put(req.body.id, req.body) //  await movies_db.put(req.body.id, req.body) era assim, com um .id depois do primeiro body
-     res.json(req.body)
+// app.post('/movies', async (req , res) => {
+//      await movies_db.put(req.body.id, req.body) //  await movies_db.put(req.body.id, req.body) era assim, com um .id depois do primeiro body
+//      res.json(req.body)
+//      console.log(req.body)
+// })
+
+
+app.post('/movies', async (req , res) => { //nao funcionaaaaa
+
+    if (parseInt(req.body.id)) {
+        await movies_db.put(req.body.id, req.body)
+        console.log(req.body)
+        res.status(200).json(req.body)
+    } else {
+        res.status(404).json("The ID must be an integer").end();
+    }
+
+   if (!(req.body.id && req.body.name && req.body.rate)) {
+        res.status(404).json("You must fill all the form").end()
+    }
+
+    // await movies_db.put(req.body.id, req.body) //  await movies_db.put(req.body.id, req.body) era assim, com um .id depois do primeiro body
+    // res.json(req.body)
      console.log(req.body)
 })
+
+
+
 
 app.get('/movies/:movie_id', async (req , res) => {
     movies_db.get(req.params.movie_id, function (err, value) { //o await não funciona com o sublevel aqui no get
